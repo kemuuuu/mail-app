@@ -1,0 +1,27 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Noto Sans JP', sans-serif;
+  background: $sub_color2;
+}
+
+.container {
+  margin-top: 50px;
+  width: 100%;
+  height: 100%;
+}
+.main-box {
+  width: 80%;
+  min-height: 100vh;
+}
+.sidebar-box {
+  width: 20%;
+  position: sticky;
+  float: left;
+  min-height: 100vh;
+  background: $sub_color1;
+}
