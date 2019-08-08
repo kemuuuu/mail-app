@@ -19,11 +19,13 @@
     "pug": "^2.0.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
     "sequelize": "^5.12.2"
   },
   "devDependencies": {
     "@types/react": "^16.8.24",
     "@types/react-dom": "^16.8.5",
+    "@types/react-router-dom": "^4.3.4",
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
     "ts-loader": "^6.0.4",

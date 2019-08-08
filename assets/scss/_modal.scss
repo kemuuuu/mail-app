@@ -1,0 +1,64 @@
+.modal_wrap input{
+  display: none;
+}
+
+.modal_overlay{
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  filter: opacity(0);
+  transition: filter 0.5s, transform 0s 0.5s;
+  transform: scale(0);
+}
+
+.modal_trigger{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.modal_content{
+  align-self: center;
+  width: 50%;
+  padding: 30px 30px 15px;
+  box-sizing: border-box;
+  background: #fff;
+  line-height: 1.4em;
+  transform: translateY(-100%);
+  transition: 0.5s;
+  color: $font_color;
+}
+
+.modal_title {
+  font-size: $large_font;
+}
+
+.modal_body {
+  margin-top: 20px;
+  font-size: $midium_font;
+}
+
+.close_button{
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal_wrap input:checked ~ .modal_overlay{
+  filter: opacity(1);
+  transform: scale(1);
+  transition: filter 0.5s;
+}
+
+.modal_wrap input:checked ~ .modal_overlay .modal_content{
+  transform: translateY(20px);
+}

@@ -15,13 +15,28 @@ body {
   height: 100%;
 }
 .main-box {
+  display: inline-block;
   width: 80%;
   min-height: 100vh;
 }
 .sidebar-box {
+  display: inline-block;
   width: 20%;
   position: sticky;
   float: left;
   min-height: 100vh;
   background: $sub_color1;
+}
+
+.heading {
+  width: 80%;
+  // border-bottom: 1px solid $sub_color1;
+  padding: 10px;
+  font-size: $large_font;
+  color: font_color;
+  font-weight: bold;
+}
+
+.pointer {
+  cursor: pointer;
 }

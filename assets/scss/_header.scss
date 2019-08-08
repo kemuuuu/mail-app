@@ -4,5 +4,7 @@
   position: fixed;
   top: 0;
   box-shadow: 0 2px 2px 2px rgba(0,0,0,0.3);
-  background: $main_color1;
+  background: $main_color2;
+  z-index: 100;
+  padding: 0 0 0 10px;
 }

@@ -3,6 +3,7 @@
     color: white;
     padding: 25px 5px;
     transition: .4s;
+    font-weight: bold;
     &:hover {
       background: lighten($sub_color1, 15%);
     }

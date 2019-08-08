@@ -1,0 +1,27 @@
+.template-create-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.template-create-content {
+  display: block;
+  width: 80%;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  position: relative;
+}
+
+.template-create-input {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  color: $font_color;
+}
+
+.template-create-label {
+  display: block;
+  font-size: 16px;
+  color: $font_color;
+  margin: 10px 9%;
+}

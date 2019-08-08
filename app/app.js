@@ -3,24 +3,26 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const db = require('./models/index');
 
-/**
- * APP
- */
 const app = express();
-// view engine setup
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
 
-// Public 以下は自動的に返す
-app.use('/public', express.static('./dist'))
+// ROUTERs
+const router = require('./routes/router');
+const apiRouter = require('./routes/api-router');
+
+// Routing
+app.use('/setting', router);
 app.get('/', (req, res) => {
-  res.redirect(302, '/public')
-})
+  res.redirect(302, '/setting');
+});
+
+// API
+app.use('/api', apiRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -34,7 +36,7 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send('error');
 });
 
 
