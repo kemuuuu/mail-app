@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     template_id: DataTypes.INTEGER,
     key: DataTypes.STRING,
-    a_row_below: DataTypes.BOOLEAN
+    a_row_below: DataTypes.BOOLEAN,
+    sort_number: DataTypes.INTEGER
   }, {});
   template_key.associate = function(models) {
     template_key.belongsTo(models.template, {

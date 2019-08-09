@@ -48,7 +48,6 @@
 }
 
 .input-checkbox:checked + .input-checkbox-label {
-  color: $main_color2;
   &::after {
     content: "";
     display: block;

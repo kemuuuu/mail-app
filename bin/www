@@ -83,8 +83,8 @@ function onListening() {
 /**
  * MAIL
  */
-const mail = new connection('alt.sakamura@gmail.com', 'Ysakamura53@');
-mail
-  .connect()
-  .then(() => mail.selectMailBox())
-  // .then(() => mail.waitForMail())
+// const mail = new connection('alt.sakamura@gmail.com', 'Ysakamura53@');
+// mail
+//   .connect()
+//   .then(() => mail.selectMailBox())
+//   .then(() => mail.waitForMail())

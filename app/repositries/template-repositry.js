@@ -27,6 +27,21 @@ class TemplateRepositry {
   }
 
   /**
+   * IDからtemplateが持つKey一覧を取得
+   * @param {string} id 
+   */
+  findKeys(id) {
+    return new Promise((resolve, reject) => {
+      template.findOne({
+        where: {id: id},
+        include: [db.template_key]
+      })
+      .then(template => resolve(template))
+      .catch(err => console.error(err));
+    })
+  }
+
+  /**
    * Template 作成
    * @param {name: string, address: string} params
   */

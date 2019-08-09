@@ -1,7 +1,10 @@
-const { src, dest, watch } = require('gulp')
-const sass = require('gulp-sass')
+const { src, dest, watch } = require('gulp');
+const sass = require('gulp-sass');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
+const webpackConfig = require('./webpack.config')
 
-// compile
+// compile-sass
 const compileSass = () => {
   return (
     src('assets/scss/index.scss')
@@ -13,7 +16,19 @@ const compileSass = () => {
   )
 }
 
-// watch
-const watchSassFiles = () => watch(['assets/scss/*.scss'], compileSass)
+// compile-react
+const compileReact = () => {
+  return (
+    src('src/index.tsx')
+    .pipe( webpackStream(webpackConfig, webpack) )
+    .pipe(dest('dist'))
+  );
+}
 
-exports.default = watchSassFiles;
+// watch
+const watchFiles = () => { 
+  watch(['src/**/*.tsx'], compileReact);
+  watch(['assets/scss/*.scss'], compileSass);
+}
+
+exports.default = watchFiles;

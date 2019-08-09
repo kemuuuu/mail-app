@@ -127,7 +127,7 @@ body {
 }
 
 .input-text:focus {
-  border: solid 1px #85D3C1;
+  border: solid 1px #37c0a0;
 }
 
 .input-text-key {
@@ -142,7 +142,7 @@ body {
 }
 
 .input-text-key:focus {
-  border: solid 1px #85D3C1;
+  border: solid 1px #37c0a0;
 }
 
 .input-checkbox {
@@ -167,10 +167,6 @@ body {
   border-radius: 4px;
 }
 
-.input-checkbox:checked + .input-checkbox-label {
-  color: #85D3C1;
-}
-
 .input-checkbox:checked + .input-checkbox-label::after {
   content: "";
   display: block;
@@ -180,8 +176,8 @@ body {
   width: 7px;
   height: 14px;
   transform: rotate(40deg);
-  border-bottom: 3px solid #85D3C1;
-  border-right: 3px solid #85D3C1;
+  border-bottom: 3px solid #37c0a0;
+  border-right: 3px solid #37c0a0;
 }
 
 .btn-border {
@@ -197,7 +193,7 @@ body {
   margin: auto;
   margin-top: 20px;
   color: #ffffff;
-  background-color: #85D3C1;
+  background-color: #37c0a0;
 }
 
 .btn-border:hover {
@@ -236,7 +232,7 @@ body {
   transition: .4s;
   margin: auto;
   margin-top: 20px;
-  color: #85D3C1;
+  color: #37c0a0;
 }
 
 .btn-border--create {
@@ -251,7 +247,7 @@ body {
   transition: .2s;
   color: #ffffff;
   margin-left: 50%;
-  background-color: #85D3C1;
+  background-color: #37c0a0;
 }
 
 .btn-border--create:hover {
@@ -330,7 +326,7 @@ body {
   position: fixed;
   top: 0;
   box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.3);
-  background: #85D3C1;
+  background: #37c0a0;
   z-index: 100;
   padding: 0 0 0 10px;
 }
@@ -437,7 +433,7 @@ thead {
 }
 
 th {
-  color: #85D3C1;
+  color: #37c0a0;
   text-align: center;
   padding: 10px 0;
 }
@@ -450,7 +446,7 @@ td {
 }
 
 .datarow:hover {
-  background: #ffbf36;
+  background: #ffbc2c;
 }
 
 .table-footer {

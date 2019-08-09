@@ -1,9 +1,11 @@
 import * as React from 'react'
+import { postData, getData } from '../../utils/fetch-utils';
 import { RouteComponentProps } from 'react-router-dom';
+import { TemplateKey } from '../../mailconnect';
 
 interface TemplateKeyRegisterState {
   templateId: string;
-  keyValues: string[];
+  keys: TemplateKey[];
 }
 
 interface TemplateKeyRegisterProps extends RouteComponentProps<{id: string}> {}
@@ -22,8 +24,57 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
     const { params } = this.props.match;
     this.state = {
       templateId: params.id,
-      keyValues: new Array<string>(this.ROWS_NUM).fill('')
+      keys: this.createEmptyKey(params.id)
     }
+  }
+
+  /**
+   * Get keys that a template has
+   */
+  componentWillMount() {
+    // Skip if template ID is not set for this.
+    if (!this.state.templateId) return;
+
+    // Create URL_OBJECT
+    const host = document.baseURI;
+    const url = '/api/v1/template/findkeys';
+    const url_obj = new URL(url, host);
+    const url_params = new URLSearchParams;
+    // Include template_id in query
+    url_params.append('id', this.state.templateId);
+    url_obj.search = url_params.toString();
+
+    // Exec fetch(GET)
+    getData(url_obj.toString())
+      .then((data) => {
+        const keys = data.result.template_keys;
+        if (keys<1) return;
+        else {
+          this.setState({ keys: keys})
+        }
+      })
+      .catch(err => { 
+        console.error(err)
+      });
+  }
+
+  /**
+   * Create empty key-records for initialize.
+   * @param templateId Target template id
+   */
+  createEmptyKey(templateId: string) {
+    const tmpKeys = [];
+    for (let i = 0; i < this.ROWS_NUM; i++) {
+      const tmp: TemplateKey = {
+        id: '',
+        template_id: templateId,
+        key: '',
+        sort_number: i,
+        a_row_below: false
+      }
+      tmpKeys.push(tmp);
+    }
+    return tmpKeys;
   }
 
   /**
@@ -32,9 +83,21 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
    */
   onKeyChange(event: InputEvent) {
     const val = event.target.value;
-    const tmpVals = this.state.keyValues;
-    tmpVals[event.target.id] = val;
-    this.setState({ keyValues: tmpVals })
+    const tmpKeys = this.state.keys;
+    tmpKeys[event.target.id].key = val;
+    this.setState({ keys: tmpKeys });
+  }
+
+  /**
+   * Set the array assigned boolean value to state
+   * @param event Form input event
+  */
+  onCheckChange(event: InputEvent) {
+    const val = event.target.checked;
+    const tmpKeys = this.state.keys;
+    if (event.target.name === 'aRowBelow') {
+      tmpKeys[event.target.id].a_row_below = val;
+    }
   }
 
   /**
@@ -52,11 +115,19 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
               type="text" 
               name="templateName" 
               className="input-text-key" 
-              onChange={(e: InputEvent) => {this.onKeyChange(e)}}
+              value={this.state.keys[i].key}
+              onChange={ (e: InputEvent) => {this.onKeyChange(e)} }
               placeholder="キー名を入力"></input>
           </div>
           <label>
-            <input key={i} type="checkbox" name="1RowBelow" className="input-checkbox"></input>
+            <input
+              id={String(i)} 
+              key={i} 
+              type="checkbox" 
+              name="aRowBelow" 
+              className="input-checkbox"
+              checked={this.state.keys[i].a_row_below}
+              onChange={ (e: InputEvent) => {this.onCheckChange(e)} }></input>
             <span className="input-checkbox-label">一行下を取得</span>
           </label>
         </div>
@@ -66,8 +137,14 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
     return form;
   }
 
+  /**
+   * Save the result of edit
+   */
   submit() {
-    console.log(this.state.keyValues)
+    const url = '/api/v1/template-key/regist';
+    postData(url, this.state)
+      .then(() => location.href='/setting/template/list')
+      .catch(error => console.error(error));
   }
 
   render() {

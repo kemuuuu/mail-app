@@ -34,6 +34,23 @@ exports.findone = (req, res, next) => {
 }
 
 /**
+ * template が持っているkey一覧を取得
+ */
+exports.findKeys = (req, res, next) => {
+
+  const id = req.query.id;
+
+  repo
+    .findKeys(id)
+    .then((template) => {
+      res.json({ result: template });
+    })
+    .catch(err => {
+      console.error(err);
+    })
+}
+
+/**
  * template作成API
  */
 exports.create = (req, res, next) => {

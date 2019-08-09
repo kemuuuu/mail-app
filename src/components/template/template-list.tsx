@@ -10,6 +10,10 @@ interface TemplateListState {
 }
 interface TemplateListProps {}
 
+/**
+ * Mouse event interface.
+ * For anchor tag
+ */
 interface OnClickEvent extends React.MouseEvent<HTMLAnchorElement> {
   target: HTMLAnchorElement
 }
@@ -26,6 +30,9 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
     };
   }
 
+  /**
+   * Get template for list.
+   */
   componentWillMount() {
     const url = '/api/v1/template/findall';
     getData(url)
