@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING
   }, {});
   template.associate = function(models) {
-    // associations can be defined here
+    template.hasMany(models.template_key, {foreignKey: 'template_id'});
   };
   return template;
 };

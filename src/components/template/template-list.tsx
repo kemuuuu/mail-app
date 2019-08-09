@@ -29,7 +29,7 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
   componentWillMount() {
     const url = '/api/v1/template/findall';
     getData(url)
-      .then(data => this.setState({templates: data.templates}))
+      .then(data => this.setState({templates: data.result}))
       .catch(err => console.error(err));
   }
 
@@ -38,6 +38,7 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
     this.setState({ 
       selectedTemplateId: e.target.id
     });
+    location.href = `/setting/template/edit/${e.target.id}`;
   }
 
   onRegistClick(e: OnClickEvent) {
@@ -45,6 +46,7 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
     this.setState({ 
       selectedTemplateId: e.target.id
     });
+    location.href = `/setting/template/key-register/${e.target.id}`;
   }
 
   onDeleteClick(e: OnClickEvent) {
@@ -78,7 +80,7 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
           <td>{e.name}</td>
           <td>{e.address}</td>
           <td>
-            <a className="pointer icon-button" id={e.id} onClick={(e: OnClickEvent) => this.onEditClick(e)}>
+            <a className="pointer icon-button" id={e.id} onClick={(e: OnClickEvent) => this.onRegistClick(e)}>
               <img id={e.id} src="./images/icon__key.png" alt="regist" height="20px" width="auto"/>
               <span className="tooltip"><span className="text">キー登録</span></span>
             </a>
@@ -152,7 +154,7 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
               </tbody>
             </table>
             <div className="table-footer">
-              全{rows}件中 1-{curRows}件表示
+              全{rows}件中 {curRows}件表示
             </div>
           </div>
         </div>

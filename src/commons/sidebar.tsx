@@ -4,9 +4,11 @@ export class Sidebar extends React.Component {
   render() {
     return(
       <div className="sidebar">
-        <div className="sidebar__item pointer">
-          ホーム
-        </div>
+        <a href="/">
+          <div className="sidebar__item pointer">
+            ホーム
+          </div>
+        </a>
         <a href="/setting/template/list">
           <div className="sidebar__item pointer">
             メールテンプレート設定

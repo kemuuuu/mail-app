@@ -51,11 +51,11 @@ export class TemplateCreate extends React.Component<TemplateCreateProps, Templat
           <div className="template-create-content">
             <label className="template-create-label">テンプレート名</label>
             <div className="template-create-input">
-              <input type="text" name="templateName" className="input-text" onChange={(e) => this.nameChanged(e)}></input>
+              <input type="text" name="templateName" className="input-text" onChange={(e) => this.nameChanged(e)} placeholder="テンプレート名を入力してください"></input>
             </div>
             <label className="template-create-label">送信元アドレス</label>
             <div className="template-create-input">
-              <input type="text" name="templateAddress" className="input-text" onChange={(e) => this.mailChanged(e)}></input>
+              <input type="text" name="templateAddress" className="input-text" onChange={(e) => this.mailChanged(e)} placeholder="送信元アドレスを入力してください"></input>
             </div>
             <div>
               <a className="btn-border pointer" onClick={() => this.submit()}>作成</a>

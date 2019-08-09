@@ -10,6 +10,8 @@ import { Footer } from './commons/footer';
 // Components
 import { TemplateList } from './components/template/template-list';
 import { TemplateCreate } from './components/template/template-create';
+import { TemplateEdit } from './components/template/template-edit';
+import { TemplateKeyRegister } from './components/template/template-key-register';
 
 class App extends React.Component {
   render () {
@@ -25,6 +27,8 @@ class App extends React.Component {
               <Route exact path="/setting/" component={TemplateList}/>
               <Route path="/setting/template/list" component={TemplateList}/>
               <Route path="/setting/template/create" component={TemplateCreate}/>
+              <Route path="/setting/template/edit/:id" component={TemplateEdit}/>
+              <Route path="/setting/template/key-register/:id" component={TemplateKeyRegister} />
             </BrowserRouter>
           </div>
         </div>

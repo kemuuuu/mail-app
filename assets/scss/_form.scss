@@ -11,3 +11,54 @@
     border: solid 1px $main_color2;
   }
 }
+
+.input-text-key {
+  border: 0;
+  padding: 10px;
+  font-size: 16px;
+  color: $font_color;
+  border: solid 1px #ccc;
+  margin: 0 0 20px;
+  width: 100%;
+  border-radius: 3px;
+  &:focus {
+    border: solid 1px $main_color2;
+  }
+}
+
+.input-checkbox {
+  display: none;
+}
+
+.input-checkbox-label {
+  padding-left: 20px;
+  position: relative;
+  margin-right: 20px;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #999;
+    border-radius: 4px;
+  }
+}
+
+.input-checkbox:checked + .input-checkbox-label {
+  color: $main_color2;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 7px;
+    height: 14px;
+    transform: rotate(40deg);
+    border-bottom: 3px solid $main_color2;
+    border-right: 3px solid $main_color2;
+  }
+}

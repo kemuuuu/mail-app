@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { postData } from '../../utils/fetch-utils';
+import { postData, getData } from '../../utils/fetch-utils';
 import { RouteComponentProps } from 'react-router-dom';
 
 interface TemplateEditState {
@@ -14,33 +14,60 @@ interface InputEvent extends React.FormEvent<HTMLInputElement> {
   target: HTMLInputElement;
 }
 
-
 export class TemplateEdit extends React.Component<TemplateEditProps, TemplateEditState> {
 
   constructor(props: TemplateEditProps) {
     super(props);
-    const { params } = this.props.match
+    const { params } = this.props.match;
     this.state = {
       templateId: params.id,
-      templateName: '',
-      templateAddress: ''
+      templateName: 'テンプレート名',
+      templateAddress: '送信元アドレス'
     }
+  }
+
+  componentWillMount() {
+
+    // Skip if template ID is not set for this.
+    if (!this.state.templateId) return;
+
+    // Create URL_OBJECT
+    const host = document.baseURI;
+    const url = '/api/v1/template/findone';
+    const url_obj = new URL(url, host);
+    const url_params = new URLSearchParams;
+    // Include template_id in query
+    url_params.append('id', this.state.templateId);
+    url_obj.search = url_params.toString();
+
+    // Exec fetch(GET)
+    getData(url_obj.toString())
+      .then((data) => {
+        this.setState({
+          templateName: data.result.name,
+          templateAddress: data.result.address
+        })
+      })
+      .catch(err => { 
+        // ---TODO--- replace log4js
+        console.error(err)
+      });
   }
 
   nameChanged(event:InputEvent) {
     this.setState({
       templateName: event.target.value
-    })
+    });
   }
 
   mailChanged(event:InputEvent) {
     this.setState({
       templateAddress: event.target.value
-    })
+    });
   }
 
   submit() {
-    const url = '/api/v1/template/create';
+    const url = '/api/v1/template/edit';
     postData(url, this.state)
       .then(() => location.href='/setting/template/list')
       .catch(error => console.error(error));
@@ -63,7 +90,7 @@ export class TemplateEdit extends React.Component<TemplateEditProps, TemplateEdi
               <input type="text" name="templateAddress" value={this.state.templateAddress} className="input-text" onChange={(e) => this.mailChanged(e)}></input>
             </div>
             <div>
-              <a className="btn-border pointer" onClick={() => this.submit()}>作成</a>
+              <a className="btn-border pointer" onClick={() => this.submit()}>保存</a>
             </div>
           </div>
         </div>

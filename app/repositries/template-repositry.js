@@ -15,18 +15,39 @@ class TemplateRepositry {
   }
 
   /**
-   * Template 作成
-   * @param {string} name テンプレート名
-   * @param {string} address 送信元アドレス
-  */
-  create(name, address) {
+   * IDからtemplate取得
+   * @param {string} id 
+   */
+  findOne(id) {
     return new Promise((resolve, reject) => {
-      template.create({
-        name: name,
-        address: address
-      })
+      template.findOne({ where: {id: id}})
       .then(template => resolve(template))
       .catch(err => console.error(err));
+    })
+  }
+
+  /**
+   * Template 作成
+   * @param {name: string, address: string} params
+  */
+  create(params) {
+    return new Promise((resolve, reject) => {
+      template.create(params)
+      .then(template => resolve(template))
+      .catch(err => console.error(err));
+    })
+  }
+
+  /**
+   * template 更新
+   * @param {any} params 更新する情報 
+   * @param {string} id 更新するレコードid
+   */
+  update(params, id) {
+    return new Promise((resolve, reject) => {
+      template.update(params, { where: { id: id } })
+      .then(template => resolve(template))
+      .catch(err => console.error(err))
     })
   }
 

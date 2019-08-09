@@ -84,6 +84,7 @@ body {
   margin-top: 50px;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .main-box {
@@ -93,12 +94,13 @@ body {
 }
 
 .sidebar-box {
-  display: inline-block;
   width: 20%;
   position: sticky;
   float: left;
   min-height: 100vh;
   background: #383636;
+  padding-bottom: 10000px;
+  margin-bottom: -10000px;
 }
 
 .heading {
@@ -126,6 +128,60 @@ body {
 
 .input-text:focus {
   border: solid 1px #85D3C1;
+}
+
+.input-text-key {
+  border: 0;
+  padding: 10px;
+  font-size: 16px;
+  color: #666666;
+  border: solid 1px #ccc;
+  margin: 0 0 20px;
+  width: 100%;
+  border-radius: 3px;
+}
+
+.input-text-key:focus {
+  border: solid 1px #85D3C1;
+}
+
+.input-checkbox {
+  display: none;
+}
+
+.input-checkbox-label {
+  padding-left: 20px;
+  position: relative;
+  margin-right: 20px;
+}
+
+.input-checkbox-label::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #999;
+  border-radius: 4px;
+}
+
+.input-checkbox:checked + .input-checkbox-label {
+  color: #85D3C1;
+}
+
+.input-checkbox:checked + .input-checkbox-label::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 7px;
+  height: 14px;
+  transform: rotate(40deg);
+  border-bottom: 3px solid #85D3C1;
+  border-right: 3px solid #85D3C1;
 }
 
 .btn-border {
@@ -425,4 +481,35 @@ td {
 .icon-button:hover > .tooltip {
   visibility: visible;
   opacity: 1;
+}
+
+.template-key-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.template-key-content {
+  display: block;
+  width: 80%;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  position: relative;
+}
+
+.template-key-row {
+  width: 65%;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+.template-key-label {
+  font-size: 16px;
+  color: #666666;
+}
+
+.template-key-input {
+  color: #666666;
 }

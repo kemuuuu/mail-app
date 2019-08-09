@@ -1,0 +1,30 @@
+.template-key-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.template-key-content {
+  display: block;
+  width: 80%;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  position: relative;
+}
+
+.template-key-row {
+  width: 65%;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+.template-key-label {
+  font-size: 16px;
+  color: $font_color;
+}
+
+.template-key-input {
+  color: $font_color;
+}
