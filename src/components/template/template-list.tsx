@@ -8,16 +8,12 @@ interface TemplateListState {
   selectedTemplateId: string;
   showModal: boolean;
 }
+
 interface TemplateListProps {}
 
-/**
- * Mouse event interface.
- * For anchor tag
- */
 interface OnClickEvent extends React.MouseEvent<HTMLAnchorElement> {
   target: HTMLAnchorElement
 }
-
 
 export class TemplateList extends React.Component<TemplateListProps, TemplateListState> {
 
@@ -89,19 +85,19 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
           <td>
             <a className="pointer icon-button" id={e.id} onClick={(e: OnClickEvent) => this.onRegistClick(e)}>
               <img id={e.id} src="./images/icon__key.png" alt="regist" height="20px" width="auto"/>
-              <span className="tooltip"><span className="text">キー登録</span></span>
+              <span id={e.id} className="tooltip"><span id={e.id} className="text">キー登録</span></span>
             </a>
           </td>
           <td>
             <a className="pointer icon-button" id={e.id} onClick={(e: OnClickEvent) => this.onEditClick(e)}>
               <img id={e.id} src="./images/icon__edit.png" alt="edit" height="20px" width="auto"/>
-              <span className="tooltip"><span className="text">テンプレート編集</span></span>
+              <span id={e.id} className="tooltip"><span id={e.id} className="text">テンプレート編集</span></span>
             </a>
           </td>
           <td>
             <a className="pointer icon-button" id={e.id} onClick={(e: OnClickEvent) => this.onDeleteClick(e)}>
               <img id={e.id} src="./images/icon__delete.png" alt="delete" height="20px" width="auto"/>
-              <span className="tooltip"><span className="text">テンプレート削除</span></span>
+              <span id={e.id} className="tooltip"><span id={e.id} className="text">テンプレート削除</span></span>
             </a>
           </td>
         </tr>
@@ -147,6 +143,9 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
                   </th>
                   <th>
                     メールアドレス
+                  </th>
+                  <th>
+                    {/* 操作 */}
                   </th>
                   <th>
                     {/* 操作 */}

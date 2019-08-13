@@ -1,5 +1,5 @@
 /**
- * TEMPLATE MODEL
+ * template
  */
 export interface Template {
   id: string;
@@ -8,7 +8,7 @@ export interface Template {
 }
 
 /**
- * TEMPLATE KEY MODEL
+ *  template key
  */
 export interface TemplateKey { 
   id: string;
@@ -16,4 +16,15 @@ export interface TemplateKey {
   key: string;
   sort_number: number;
   a_row_below: boolean;
+}
+
+/**
+ * auth info
+ */
+export interface AuthInfo {
+  id: string;
+  token: string;
+  refresh_token: string;
+  type: string;
+  base_url: string;
 }

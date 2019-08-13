@@ -34,3 +34,21 @@ export const getData = function(url: string) {
   })
   .then(response => response.json());
 }
+
+/**
+ * クエリを含めたURL生成
+ * @param path 
+ * @param params 
+ */
+export const generateGetUrlObj = function(host: string, path: string, params: any) {
+  // Create URL_OBJECT
+  const url = path;
+  const url_obj = new URL(url, host);
+  const url_params = new URLSearchParams;
+  // Include template_id in query
+  Object.keys(params).map((e) => {
+    url_params.append(e, params[e])
+  });
+  url_obj.search = url_params.toString();
+  return url_obj.toString();
+}

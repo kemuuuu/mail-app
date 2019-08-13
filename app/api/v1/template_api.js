@@ -1,4 +1,4 @@
-const repositry = require('../../repositries/template-repositry')
+const repositry = require('../../repositries/template-repositry');
 const repo = new repositry();
 
 /**

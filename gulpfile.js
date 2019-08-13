@@ -27,7 +27,7 @@ const compileReact = () => {
 
 // watch
 const watchFiles = () => { 
-  watch(['src/**/*.tsx'], compileReact);
+  watch(['src/**/*.tsx', 'src/**/*.ts'], compileReact);
   watch(['assets/scss/*.scss'], compileSass);
 }
 

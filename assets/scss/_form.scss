@@ -38,8 +38,8 @@
     content: "";
     display: block;
     position: absolute;
-    top: 5px;
-    left: 0;
+    top: 0;
+    left: -5px;
     width: 15px;
     height: 15px;
     border: 1px solid #999;
@@ -52,8 +52,8 @@
     content: "";
     display: block;
     position: absolute;
-    top: 0;
-    left: 5px;
+    top: -5px;
+    left: 0;
     width: 7px;
     height: 14px;
     transform: rotate(40deg);

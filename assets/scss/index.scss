@@ -9,6 +9,8 @@
 @import '_form';
 // ボタン
 @import '_button';
+// ローダー
+@import '_loader';
 // モーダル
 @import '_modal';
 // ヘッダ
@@ -23,3 +25,9 @@
 @import '_template_list';
 // テンプレートキー項目登録画面
 @import '_template_keyRegister';
+// サービス選択
+@import '_service_select';
+// salesforce連携
+@import '_service_salesforce';
+// kintone連携
+@import '_service_kintone';

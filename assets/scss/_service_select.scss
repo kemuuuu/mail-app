@@ -1,0 +1,45 @@
+.service-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.service-select-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+}
+
+.service-logo-outer {
+  padding: 10px;
+}
+
+.service-logo-inner {
+  background: white;
+  border-radius: 5px;
+  padding: 15px;
+  height: 140px;
+  transition: .4s;
+  &:hover {
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.3);
+    & > .service-logo-img {
+      transform: scale(1.1, 1.1);
+    }
+  }
+}
+
+.service-logo-img {
+  transition: .4s;
+}
+
+#slack-logo {
+  padding-top: 30px;
+}
+
+#backlog-logo {
+  padding-top: 50px;
+}

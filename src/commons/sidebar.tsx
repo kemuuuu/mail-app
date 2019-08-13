@@ -14,9 +14,11 @@ export class Sidebar extends React.Component {
             メールテンプレート設定
           </div>
         </a>
-        <div className="sidebar__item pointer">
-          Webサービス連携設定
-        </div>
+        <a href="/setting/service/select">
+          <div className="sidebar__item pointer">
+            Webサービス連携設定
+          </div>
+        </a>
         <div className="sidebar__item pointer">
           アカウント設定
         </div>

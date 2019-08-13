@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { postData } from '../../utils/fetch-utils'
+import { postData } from '../../utils/fetch-utils';
 
 interface TemplateCreateState {
   templateName: string;

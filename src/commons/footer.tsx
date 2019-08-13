@@ -4,7 +4,7 @@ export class Footer extends React.Component {
   render() {
     return(
       <div className="footer">
-        © MAIL CONNECT 2019
+        © LINKER 2019
       </div>
     );
   }

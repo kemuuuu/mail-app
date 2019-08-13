@@ -98,6 +98,7 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
     if (event.target.name === 'aRowBelow') {
       tmpKeys[event.target.id].a_row_below = val;
     }
+    this.setState({ keys: tmpKeys });
   }
 
   /**
