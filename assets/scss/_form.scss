@@ -1,7 +1,7 @@
 .input-text {
   border: 0;
   padding: 10px;
-  font-size: 16px;
+  font-size: $midium_font;
   color: $font_color;
   border: solid 1px #ccc;
   margin: 0 0 20px;
@@ -15,7 +15,7 @@
 .input-text-key {
   border: 0;
   padding: 10px;
-  font-size: 16px;
+  font-size: $midium_font;
   color: $font_color;
   border: solid 1px #ccc;
   margin: 0 0 20px;
@@ -26,10 +26,12 @@
   }
 }
 
+/**
+* CHECK BOX
+*/
 .input-checkbox {
   display: none;
 }
-
 .input-checkbox-label {
   padding-left: 20px;
   position: relative;
@@ -46,7 +48,6 @@
     border-radius: 4px;
   }
 }
-
 .input-checkbox:checked + .input-checkbox-label {
   &::after {
     content: "";
@@ -60,4 +61,63 @@
     border-bottom: 3px solid $main_color2;
     border-right: 3px solid $main_color2;
   }
+}
+
+
+/**
+* SELECT BOX
+*/
+.cp_ipselect {
+  overflow: hidden;
+  width: 90%;
+  margin: 20px;
+  text-align: center;
+  select {
+    width: 100%;
+    padding-right: 1em;
+    cursor: pointer;
+    text-indent: 0.01px;
+    text-overflow: ellipsis;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-image: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    appearance: none;
+    &::-ms-expand {
+      display: none;
+    }
+  }
+  &.cp_sl01 {
+    position: relative;
+    border: 1px solid #bbbbbb;
+    border-radius: 2px;
+    background: #ffffff;
+    &::before {
+      position: absolute;
+      top: 0.8em;
+      right: 0.9em;
+      width: 0;
+      height: 0;
+      padding: 0;
+      content: '';
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #666666;
+      pointer-events: none;
+    }
+    select {
+      padding: 8px 38px 8px 8px;
+      color: $font_color;
+    }
+  }
+}
+
+
+.function-create-label {
+  display: block;
+  font-size: 16px;
+  color: $font_color;
+  // margin: 10px 0 -20px 30px;
 }

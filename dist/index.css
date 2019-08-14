@@ -115,6 +115,10 @@ body {
   cursor: pointer;
 }
 
+.m-20 {
+  margin: 20px;
+}
+
 .input-text {
   border: 0;
   padding: 10px;
@@ -145,6 +149,9 @@ body {
   border: solid 1px #37c0a0;
 }
 
+/**
+* CHECK BOX
+*/
 .input-checkbox {
   display: none;
 }
@@ -178,6 +185,67 @@ body {
   transform: rotate(40deg);
   border-bottom: 3px solid #37c0a0;
   border-right: 3px solid #37c0a0;
+}
+
+/**
+* SELECT BOX
+*/
+.cp_ipselect {
+  overflow: hidden;
+  width: 90%;
+  margin: 20px;
+  text-align: center;
+}
+
+.cp_ipselect select {
+  width: 100%;
+  padding-right: 1em;
+  cursor: pointer;
+  text-indent: 0.01px;
+  text-overflow: ellipsis;
+  border: none;
+  outline: none;
+  background: transparent;
+  background-image: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.cp_ipselect select::-ms-expand {
+  display: none;
+}
+
+.cp_ipselect.cp_sl01 {
+  position: relative;
+  border: 1px solid #bbbbbb;
+  border-radius: 2px;
+  background: #ffffff;
+}
+
+.cp_ipselect.cp_sl01::before {
+  position: absolute;
+  top: 0.8em;
+  right: 0.9em;
+  width: 0;
+  height: 0;
+  padding: 0;
+  content: '';
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #666666;
+  pointer-events: none;
+}
+
+.cp_ipselect.cp_sl01 select {
+  padding: 8px 38px 8px 8px;
+  color: #666666;
+}
+
+.function-create-label {
+  display: block;
+  font-size: 16px;
+  color: #666666;
 }
 
 .btn-border {
@@ -365,6 +433,11 @@ body {
   transform: translateY(20px);
 }
 
+.func-create-box {
+  display: block;
+  margin: 0 auto;
+}
+
 .header {
   height: 50px;
   width: 100%;
@@ -437,6 +510,34 @@ body {
   color: font_color;
 }
 
+.template-list-content .datarow:hover {
+  background: #ffbc2c;
+}
+
+table {
+  width: 100%;
+  border-radius: 5px;
+  background: white;
+  margin-top: 20px;
+}
+
+table thead {
+  border-bottom: 2px solid #cccccc;
+}
+
+table thead th {
+  color: #37c0a0;
+  text-align: center;
+  padding: 10px 0;
+}
+
+table td {
+  color: #666666;
+  text-align: center;
+  padding: 10px 0;
+  border-bottom: 0.5px solid #cccccc;
+}
+
 .template-list-search-box {
   display: flex;
   width: 80%;
@@ -464,34 +565,6 @@ body {
 
 .template-list-heading-title {
   display: inline-block;
-}
-
-table {
-  width: 100%;
-  border-radius: 5px;
-  background: white;
-  margin-top: 20px;
-}
-
-thead {
-  border-bottom: 2px solid #cccccc;
-}
-
-th {
-  color: #37c0a0;
-  text-align: center;
-  padding: 10px 0;
-}
-
-td {
-  color: #666666;
-  text-align: center;
-  padding: 10px 0;
-  border-bottom: 0.5px solid #cccccc;
-}
-
-.datarow:hover {
-  background: #ffbc2c;
 }
 
 .table-footer {

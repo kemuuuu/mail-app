@@ -9,9 +9,7 @@ export const postData = function(url: string, data: any) {
     mode: "cors",
     cache: "no-cache",
     credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-    },
+    headers: { "Content-Type": "application/json; charset=utf-8" },
     redirect: "follow",
     referrer: "no-referrer",
     body: JSON.stringify(data),
@@ -29,6 +27,7 @@ export const getData = function(url: string) {
     mode: "cors",
     cache: "no-cache",
     credentials: "same-origin",
+    headers: { "Content-Type": "application/json; charset=utf-8" },
     redirect: "follow",
     referrer: "no-referrer",
   })
@@ -44,7 +43,7 @@ export const generateGetUrlObj = function(host: string, path: string, params: an
   // Create URL_OBJECT
   const url = path;
   const url_obj = new URL(url, host);
-  const url_params = new URLSearchParams;
+  const url_params = new URLSearchParams();
   // Include template_id in query
   Object.keys(params).map((e) => {
     url_params.append(e, params[e])

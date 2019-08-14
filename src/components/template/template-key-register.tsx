@@ -50,7 +50,7 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
         const keys = data.result.template_keys;
         if (keys<1) return;
         else {
-          this.setState({ keys: keys})
+          this.setState({ keys: keys});
         }
       })
       .catch(err => { 
@@ -83,7 +83,7 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
    */
   onKeyChange(event: InputEvent) {
     const val = event.target.value;
-    const tmpKeys = this.state.keys;
+    const tmpKeys = Object.assign({}, this.state.keys);
     tmpKeys[event.target.id].key = val;
     this.setState({ keys: tmpKeys });
   }

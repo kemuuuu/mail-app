@@ -6,10 +6,8 @@ const repo = new repositry();
  */
 exports.bulkUpsert = (req, res, next) => {
   // Input values
-  const params = req.body.keys;
-  // add createdAt, updatedAt
-  params.createdAt = new Date();
-  params.updatedAt = new Date();
+  const keys = req.body.keys;
+  const params = Object.keys(keys).map((e) => {return keys[e]});
 
   // target fields
   const fields = ["id", "template_id", "key", "a_row_below", "sort_number", "createdAt", "updatedAt"];

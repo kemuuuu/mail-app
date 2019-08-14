@@ -13,7 +13,9 @@ class TemplateKeyRepositry {
         fields: fields,
         updateOnDuplicate: upsertfields
       })
-      .then(template => resolve(template))
+      .then(template => { 
+        resolve(template);
+      })
       .catch(err => console.error(err));
     })
   }

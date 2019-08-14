@@ -28,3 +28,35 @@ export interface AuthInfo {
   type: string;
   base_url: string;
 }
+
+/**
+ * kintone api から取得したアプリ情報
+ * id === appId
+ */
+export interface KintoneApp {
+  id: string;
+  appId: string;
+  name: string;
+  spaceId: string;
+  threadId: string;
+}
+
+/**
+ * kintone api から取得した項目情報
+ * id === code
+ * name === label
+ */
+export interface KintoneProperty {
+  id: string;
+  name: string;
+  code: string;
+  expression: string;
+  hideExpression: boolean;
+  label: string;
+  maxLength: string;
+  minLength: string;
+  noLabel: boolean;
+  required: boolean;
+  type: string;
+  unique: boolean;
+}

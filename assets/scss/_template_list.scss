@@ -9,7 +9,31 @@
   margin: 20px auto;
   // padding: 20px;
   position: relative;
-  color: font_color;
+  color: font_color;  
+  .datarow:hover {
+    background: $accent_color
+  }
+}
+
+table {
+  width: 100%;
+  border-radius: 5px;
+  background: white;
+  margin-top: 20px;
+  thead {
+    border-bottom: 2px solid #cccccc;
+    th {
+      color: $main_color2;
+      text-align: center;
+      padding: 10px 0;
+    }
+  }
+  td {
+    color: $font_color;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 0.5px solid #cccccc;
+  }
 }
 
 .template-list-search-box {
@@ -41,34 +65,7 @@
   display: inline-block;
 }
 
-table {
-  width: 100%;
-  border-radius: 5px;
-  background: white;
-  margin-top: 20px;
-}
 
-thead {
-  border-bottom: 2px solid #cccccc;
-}
-
-
-th {
-  color: $main_color2;
-  text-align: center;
-  padding: 10px 0;
-}
-
-td {
-  color: $font_color;
-  text-align: center;
-  padding: 10px 0;
-  border-bottom: 0.5px solid #cccccc;
-}
-
-.datarow:hover {
-  background: $accent_color
-}
 
 .table-footer {
   color: $font_color;
