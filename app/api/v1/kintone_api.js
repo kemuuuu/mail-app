@@ -29,8 +29,6 @@ exports.getfields = (req, res, next) => {
   .then((result) => {
     const appId = req.query.appId;
     const spaceId = req.query.spaceId;
-    console.log(appId);
-    console.log(spaceId);
     // Create URL_OBJECT
     const params = { app: appId };
     const path = `/k/guest/${spaceId}/v1/preview/app/form/fields.json`;
@@ -39,7 +37,6 @@ exports.getfields = (req, res, next) => {
     const header = {
       "X-Cybozu-Authorization": result.token
     };
-    console.log(url)
     fetchUtils.getData(url, header)
     .then((fields) => {
       res.json({result: fields});

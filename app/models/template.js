@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   template.associate = function(models) {
     template.hasMany(models.template_key, {foreignKey: 'template_id'});
+    template.hasMany(models.kintone_function, {foreignKey: 'template_id'});
   };
   return template;
 };
