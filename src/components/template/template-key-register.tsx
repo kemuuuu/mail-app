@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { postData, getData } from '../../utils/fetch-utils';
-import { RouteComponentProps } from 'react-router-dom';
 import { TemplateKey } from '../../mailconnect';
 
 interface TemplateKeyRegisterState {
@@ -8,7 +7,10 @@ interface TemplateKeyRegisterState {
   keys: TemplateKey[];
 }
 
-interface TemplateKeyRegisterProps extends RouteComponentProps<{id: string}> {}
+interface TemplateKeyRegisterProps {
+  selectedTemplateId: string;
+  backList: () => void;
+}
 
 interface InputEvent extends React.FormEvent<HTMLInputElement> {
   target: HTMLInputElement;
@@ -21,10 +23,9 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
 
   constructor(props: TemplateKeyRegisterProps) {
     super(props);
-    const { params } = this.props.match;
     this.state = {
-      templateId: params.id,
-      keys: this.createEmptyKey(params.id)
+      templateId: props.selectedTemplateId,
+      keys: this.createEmptyKey(props.selectedTemplateId)
     }
   }
 
@@ -144,7 +145,7 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
   submit() {
     const url = '/api/v1/template-key/regist';
     postData(url, this.state)
-      .then(() => location.href='/setting/template/list')
+      .then(() => this.props.backList())
       .catch(error => console.error(error));
   }
 

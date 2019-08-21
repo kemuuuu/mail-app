@@ -26,6 +26,21 @@
   }
 }
 
+.input-text__function {
+  border: 0;
+  padding: 10px;
+  font-size: $midium_font;
+  color: $font_color;
+  background: white;
+  border: solid 1px #ccc;
+  margin: 0 0 20px;
+  width: 90%;
+  border-radius: 3px;
+  &:focus {
+    border: solid 1px $main_color2;
+  }
+}
+
 /**
 * CHECK BOX
 */

@@ -7,11 +7,8 @@ import { Header } from './commons/header';
 import { Sidebar } from './commons/sidebar';
 import { Footer } from './commons/footer';
 
-// Components--template
-import { TemplateList } from './components/template/template-list';
-import { TemplateCreate } from './components/template/template-create';
-import { TemplateEdit } from './components/template/template-edit';
-import { TemplateKeyRegister } from './components/template/template-key-register';
+// Components
+import { TemplateHome } from './components/template/template-home';
 
 // Components--service
 import { ServiceSelect } from './components/service/service-select';
@@ -30,11 +27,8 @@ class App extends React.Component {
           </div>
           <div className="main-box">
             <BrowserRouter>
-              <Route exact path="/setting/" component={TemplateList}/>
-              <Route path="/setting/template/list" component={TemplateList}/>
-              <Route path="/setting/template/create" component={TemplateCreate}/>
-              <Route path="/setting/template/edit/:id" component={TemplateEdit}/>
-              <Route path="/setting/template/key-register/:id" component={TemplateKeyRegister} />
+              <Route exact path="/setting/" component={TemplateHome}/>
+              <Route path="/setting/template" component={TemplateHome} />
               <Route path="/setting/service/select" component={ServiceSelect} />
               <Route path="/setting/service/salesforce" component={ServiceSalesforce} />
               <Route exact path="/setting/service/kintone" component={ServiceKintone} />

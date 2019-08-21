@@ -149,6 +149,22 @@ body {
   border: solid 1px #37c0a0;
 }
 
+.input-text__function {
+  border: 0;
+  padding: 10px;
+  font-size: 16px;
+  color: #666666;
+  background: white;
+  border: solid 1px #ccc;
+  margin: 0 0 20px;
+  width: 90%;
+  border-radius: 3px;
+}
+
+.input-text__function:focus {
+  border: solid 1px #37c0a0;
+}
+
 /**
 * CHECK BOX
 */
@@ -436,6 +452,10 @@ body {
 .func-create-box {
   display: block;
   margin: 0 auto;
+}
+
+.function-input-box {
+  margin: 20px 20px 0 20px;
 }
 
 .header {

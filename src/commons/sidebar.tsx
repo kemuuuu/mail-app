@@ -9,7 +9,7 @@ export class Sidebar extends React.Component {
             ホーム
           </div>
         </a>
-        <a href="/setting/template/list">
+        <a href="/setting/template">
           <div className="sidebar__item pointer">
             メールテンプレート設定
           </div>

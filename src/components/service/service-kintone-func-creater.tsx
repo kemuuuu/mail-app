@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { getData, generateGetUrlObj } from '../../utils/fetch-utils';
+import { getData, postData, generateGetUrlObj } from '../../utils/fetch-utils';
 import { Template, TemplateKey, KintoneApp, KintoneProperty } from '../../mailconnect';
 import { SelectBoxCreater } from '../../utils/html-utils';
 
 interface ServiceKintoneFuncCreaterState {
+  functionName: string;
   templates: Template[] | null;
   apps: KintoneApp[] | null;
   loaded: boolean;
@@ -15,11 +16,16 @@ interface ServiceKintoneFuncCreaterState {
 
 interface ServiceKintoneFuncCreaterProps {}
 
+interface InputEvent extends React.FormEvent<HTMLInputElement> {
+  target: HTMLInputElement;
+}
+
 export class ServiceKintoneFuncCreater extends React.Component<ServiceKintoneFuncCreaterProps, ServiceKintoneFuncCreaterState> {
 
   constructor(props) {
     super(props);
     this.state = { 
+      functionName: '',
       templates: null,
       apps: null,
       loaded: false,
@@ -136,6 +142,12 @@ export class ServiceKintoneFuncCreater extends React.Component<ServiceKintoneFun
     this.loadTemplateKeys(e.target.value);
   }
 
+  nameChanged(e: InputEvent) {
+    this.setState({
+      functionName: e.target.value
+    });
+  }
+
   /**
    * 選択アプリ変更時
    */
@@ -202,8 +214,22 @@ export class ServiceKintoneFuncCreater extends React.Component<ServiceKintoneFun
       }
     })
     return(
-      <tbody> {keys} </tbody>
+      <tbody>{keys}</tbody>
     );
+  }
+
+  /**
+   * Function 作成
+   */
+  submit() {
+    const url = '/api/v1/kintone-function/create';
+    const params = {
+      selectedTemplateId: this.state.selectedTemplateId,
+      selectedAppId: this.state.selectedApp.id,
+      selectedAppSpaceId: this.state.selectedApp.spaceId,
+    };
+    postData(url, params)
+    .then((result) => { console.log(result) })
   }
 
   render() {
@@ -220,6 +246,12 @@ export class ServiceKintoneFuncCreater extends React.Component<ServiceKintoneFun
                   return (
                     <div>
                       <div>
+                        <label className="function-create-label">ファンクション名</label>
+                        <div className="function-input-box">
+                          <input type="text" name="functionName" className="input-text__function" onChange={(e: InputEvent) => this.nameChanged(e)} placeholder="ファンクション名を入力してください"></input>
+                        </div>
+                      </div>
+                      <div>
                         <label className="function-create-label">テンプレート名</label>
                         <SelectBoxCreater trg={this.state.templates} onSelectChange={this.onChangeTemplate} />
                       </div>
@@ -235,8 +267,11 @@ export class ServiceKintoneFuncCreater extends React.Component<ServiceKintoneFun
                               <th>連携アプリ項目</th>
                             </tr>
                           </thead>
-                          { keysList }
+                          {keysList}
                         </table>
+                      </div>
+                      <div>
+                        <a className="btn-border pointer" onClick={() => this.submit()}>作成</a>
                       </div>
                     </div>
                   );

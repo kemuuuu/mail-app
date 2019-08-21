@@ -5,7 +5,9 @@ interface TemplateCreateState {
   templateName: string;
   templateAddress: string;
 }
-interface TemplateCreateProps {}
+interface TemplateCreateProps {
+  backList: () => void
+}
 
 interface InputEvent extends React.FormEvent<HTMLInputElement> {
   target: HTMLInputElement;
@@ -37,7 +39,7 @@ export class TemplateCreate extends React.Component<TemplateCreateProps, Templat
   submit() {
     const url = '/api/v1/template/create';
     postData(url, this.state)
-      .then(() => location.href='/setting/template/list')
+      .then(() => this.props.backList())
       .catch(error => console.error(error));
   }
   

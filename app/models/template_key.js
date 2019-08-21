@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'template_id',
       targetKey: 'id'
     });
+    template_key.belongsToMany(models.kintone_function, { through: models.kintone_mapping });
   };
   return template_key;
 };

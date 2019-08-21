@@ -5,11 +5,18 @@ import { Modal } from '../../commons/modal';
 
 interface TemplateListState {
   templates: Template[];
-  selectedTemplateId: string;
-  showModal: boolean;
 }
 
-interface TemplateListProps {}
+interface TemplateListProps {
+  showModal: boolean;
+  selectedTemplateId: string;
+  onCreateClick: () => void;
+  onEditClick: (e: OnClickEvent) => void;
+  onRegisterClick: (e: OnClickEvent) => void;
+  onDeleteClick: (e: OnClickEvent) => void;
+  onModalClose: () => void;
+  backList: () => void;
+}
 
 interface OnClickEvent extends React.MouseEvent<HTMLAnchorElement> {
   target: HTMLAnchorElement
@@ -20,9 +27,7 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
   constructor(props) {
     super(props);
     this.state = {
-      templates: [],
-      selectedTemplateId: '',
-      showModal: false
+      templates: []
     };
   }
 
@@ -36,43 +41,19 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
       .catch(err => console.error(err));
   }
 
-  onEditClick(e: OnClickEvent) {
-    e.preventDefault();
-    this.setState({ 
-      selectedTemplateId: e.target.id
-    });
-    location.href = `/setting/template/edit/${e.target.id}`;
-  }
-
-  onRegistClick(e: OnClickEvent) {
-    e.preventDefault();
-    this.setState({ 
-      selectedTemplateId: e.target.id
-    });
-    location.href = `/setting/template/key-register/${e.target.id}`;
-  }
-
-  onDeleteClick(e: OnClickEvent) {
-    e.preventDefault();
-    this.setState({ 
-      selectedTemplateId: e.target.id,
-      showModal: true
-    });
-  }
-
-  onModalClose() {
-    this.setState({
-      showModal: false
-    })
-  }
-
+  /**
+   * template 削除
+   */
   templateDelete() {
     const url = '/api/v1/template/delete';
-    postData(url, {id: this.state.selectedTemplateId})
-      .then(() => location.href='/setting/template/list')
+    postData(url, {id: this.props.selectedTemplateId})
+      .then(() => location.reload())
       .catch(error => console.error(error));
   }
   
+  /**
+   * Template 一覧コンポーネント作成
+   */
   createTemplateList(): JSX.Element[] {
 
     if (this.state.templates.length < 1) return;
@@ -83,19 +64,19 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
           <td>{e.name}</td>
           <td>{e.address}</td>
           <td>
-            <a className="pointer icon-button" id={e.id} onClick={(e: OnClickEvent) => this.onRegistClick(e)}>
+            <a className="pointer icon-button" id={e.id} onClick={(e: OnClickEvent) => this.props.onRegisterClick(e)}>
               <img id={e.id} src="./images/icon__key.png" alt="regist" height="20px" width="auto"/>
               <span id={e.id} className="tooltip"><span id={e.id} className="text">キー登録</span></span>
             </a>
           </td>
           <td>
-            <a className="pointer icon-button" id={e.id} onClick={(e: OnClickEvent) => this.onEditClick(e)}>
+            <a className="pointer icon-button" id={e.id} onClick={(e: OnClickEvent) => this.props.onEditClick(e)}>
               <img id={e.id} src="./images/icon__edit.png" alt="edit" height="20px" width="auto"/>
               <span id={e.id} className="tooltip"><span id={e.id} className="text">テンプレート編集</span></span>
             </a>
           </td>
           <td>
-            <a className="pointer icon-button" id={e.id} onClick={(e: OnClickEvent) => this.onDeleteClick(e)}>
+            <a className="pointer icon-button" id={e.id} onClick={(e: OnClickEvent) => this.props.onDeleteClick(e)}>
               <img id={e.id} src="./images/icon__delete.png" alt="delete" height="20px" width="auto"/>
               <span id={e.id} className="tooltip"><span id={e.id} className="text">テンプレート削除</span></span>
             </a>
@@ -116,18 +97,20 @@ export class TemplateList extends React.Component<TemplateListProps, TemplateLis
 
     return(
       <div>
+
         <Modal
-          isShow={this.state.showModal}
+          isShow={this.props.showModal}
           onclick={() => this.templateDelete()}
-          onclose={() => this.onModalClose()}
+          onclose={() => this.props.onModalClose()}
           title="テンプレート削除"
           body="削除しますか？"
           actionName="削除"
           model="template"
-          record_id={this.state.selectedTemplateId} />
+          record_id={this.props.selectedTemplateId} />
+
         <div className="template-list-heading">
           <h1 className="template-list-heading-title">メールテンプレート一覧</h1>
-          <a href="/setting/template/create/" className="btn-border--create pointer">新規メールテンプレート作成</a>
+          <a onClick={() => this.props.onCreateClick()} className="btn-border--create pointer">新規メールテンプレート作成</a>
         </div>
         <div className="template-list-wrapper">
           <div className="template-list-search-box">

@@ -8,7 +8,10 @@ interface TemplateEditState {
   templateAddress: string;
 }
 
-interface TemplateEditProps extends RouteComponentProps<{id: string}> {}
+interface TemplateEditProps {
+  seletedTemplateId: string;
+  backList: () => void;
+}
 
 interface InputEvent extends React.FormEvent<HTMLInputElement> {
   target: HTMLInputElement;
@@ -18,9 +21,8 @@ export class TemplateEdit extends React.Component<TemplateEditProps, TemplateEdi
 
   constructor(props: TemplateEditProps) {
     super(props);
-    const { params } = this.props.match;
     this.state = {
-      templateId: params.id,
+      templateId: props.seletedTemplateId,
       templateName: 'テンプレート名',
       templateAddress: '送信元アドレス'
     }
@@ -69,7 +71,7 @@ export class TemplateEdit extends React.Component<TemplateEditProps, TemplateEdi
   submit() {
     const url = '/api/v1/template/edit';
     postData(url, this.state)
-      .then(() => location.href='/setting/template/list')
+      .then(() => this.props.backList())
       .catch(error => console.error(error));
   }
   
