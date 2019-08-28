@@ -1,20 +1,25 @@
-import * as React from 'react'
+import * as React from 'react';
+import { AppMode } from '../index';
 
-export class Sidebar extends React.Component {
+interface SidebarProps {
+  onLinkClick: (m: AppMode) => void;
+}
+
+export class Sidebar extends React.Component<SidebarProps, {}> {
   render() {
     return(
       <div className="sidebar">
-        <a href="/">
+        <a onClick={() => { this.props.onLinkClick(AppMode.TEMPLATE) }}>
           <div className="sidebar__item pointer">
             ホーム
           </div>
         </a>
-        <a href="/setting/template">
+        <a onClick={() => { this.props.onLinkClick(AppMode.TEMPLATE) }}>
           <div className="sidebar__item pointer">
             メールテンプレート設定
           </div>
         </a>
-        <a href="/setting/service/select">
+        <a onClick={() => { this.props.onLinkClick(AppMode.SERVICE) }}>
           <div className="sidebar__item pointer">
             Webサービス連携設定
           </div>

@@ -94,6 +94,9 @@ export class TemplateEdit extends React.Component<TemplateEditProps, TemplateEdi
             <div>
               <a className="btn-border pointer" onClick={() => this.submit()}>保存</a>
             </div>
+            <div>
+              <a className="btn-link pointer" onClick={() => this.props.backList()}>キャンセル</a>
+            </div>
           </div>
         </div>
       </div>

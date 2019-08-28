@@ -1,13 +1,16 @@
 import * as React from 'react';
 
-interface ServiceKintoneEditorProps {}
+interface ServiceKintoneEditorProps {
+  createClick: () => void;
+  backList: () => void;
+}
 
 interface ServiceKintoneEditorState {
-  functions: any[]
+  functions: any[];
 }
 
 interface OnClickEvent extends React.MouseEvent<HTMLAnchorElement> {
-  target: HTMLAnchorElement
+  target: HTMLAnchorElement;
 }
 
 export class ServiceKintoneEditor extends React.Component<ServiceKintoneEditorProps, ServiceKintoneEditorState> {
@@ -63,7 +66,7 @@ export class ServiceKintoneEditor extends React.Component<ServiceKintoneEditorPr
     return(
       <div className="kintone-connect-form">
         <h2>連携設定</h2>
-        <a href="/setting/service/kintone/func/create" className="btn-border--create pointer">新規ファンクション作成</a>
+        <a onClick={() => this.props.createClick()} className="btn-border--create pointer">新規ファンクション作成</a>
         <div className="template-list-content">
           <table>
             <thead>
@@ -91,6 +94,9 @@ export class ServiceKintoneEditor extends React.Component<ServiceKintoneEditorPr
           </table>
           <div className="table-footer">
             全{rows}件中 {curRows}件表示
+          </div>
+          <div>
+            <a className="btn-link pointer" onClick={() => this.props.backList()}>サービス選択に戻る</a>
           </div>
         </div>
       </div>

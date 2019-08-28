@@ -1,6 +1,11 @@
 import * as React from 'react';
+import { Service } from './service-home';
 
-export class ServiceSelect extends React.Component {
+interface ServiceSelectProps {
+  onLinkClick: (s: Service) => void;
+}
+
+export class ServiceSelect extends React.Component<ServiceSelectProps, {}> {
 
   render() {
     return(
@@ -10,14 +15,14 @@ export class ServiceSelect extends React.Component {
         </div>
         <div className="service-select-wrapper">
           <div className="service-select-content">
-            <a href="/setting/service/salesforce">
+            <a onClick={() => this.props.onLinkClick(Service.SALESFORCE)}>
               <div className="service-logo-outer">
                 <div className="service-logo-inner pointer">
                   <img className="service-logo-img" src="./images/service/salesforce_logo.png" width="200px" height="auto" />
                 </div>
               </div>
             </a>
-            <a href="/setting/service/kintone">
+            <a onClick={() => this.props.onLinkClick(Service.KINTONE)}>
               <div className="service-logo-outer">
                 <div className="service-logo-inner pointer">
                   <img className="service-logo-img" src="./images/service/kintone_logo.png" width="200px" height="auto" />

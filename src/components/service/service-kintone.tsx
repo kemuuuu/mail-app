@@ -1,14 +1,18 @@
 import * as React from 'react';
 import { ServiceKintoneRegister } from './service-kintone-register';
 import { ServiceKintoneEditor } from './service-kintone-editor';
+import { ServiceKintoneFuncCreater } from './service-kintone-func-creater';
 import { getData, generateGetUrlObj } from '../../utils/fetch-utils';
 
 interface ServiceKintoneState {
+  create: boolean;
   haveRegistered: boolean;
   loaded: boolean;
 }
 
-interface ServiceKintoneProps {}
+interface ServiceKintoneProps {
+  backselect: () => void;
+}
 
 
 export class ServiceKintone extends React.Component<ServiceKintoneProps, ServiceKintoneState> {
@@ -16,9 +20,12 @@ export class ServiceKintone extends React.Component<ServiceKintoneProps, Service
   constructor(props) {
     super(props);
     this.state = {
+      create: false,
       haveRegistered: false,
       loaded: false
     };
+    this.onCreateCancel = this.onCreateCancel.bind(this);
+    this.onCreateClick = this.onCreateClick.bind(this);
   }
 
   componentWillMount() {
@@ -49,6 +56,14 @@ export class ServiceKintone extends React.Component<ServiceKintoneProps, Service
       });
   }
 
+  onCreateClick() {
+    this.setState({ create: true });
+  }
+
+  onCreateCancel() {
+    this.setState({ create: false });
+  }
+
   render() {
     return(
       <div>
@@ -60,7 +75,11 @@ export class ServiceKintone extends React.Component<ServiceKintoneProps, Service
             {(() => {
               if (this.state.loaded) {
                 if (this.state.haveRegistered) {
-                  return <ServiceKintoneEditor />;
+                  if (this.state.create) {
+                    return <ServiceKintoneFuncCreater createCancel={this.onCreateCancel}/>
+                  } else {
+                   return <ServiceKintoneEditor createClick={this.onCreateClick} backList={this.props.backselect}/>;
+                  }
                 } else {
                   return <ServiceKintoneRegister />;
                 }

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Link } from 'react-router-dom'
 
 // Components--commons
 import { Header } from './commons/header';
@@ -11,29 +10,51 @@ import { Footer } from './commons/footer';
 import { TemplateHome } from './components/template/template-home';
 
 // Components--service
-import { ServiceSelect } from './components/service/service-select';
-import { ServiceSalesforce } from './components/service/service-salesforce';
-import { ServiceKintone } from './components/service/service-kintone';
-import { ServiceKintoneFuncCreater } from './components/service/service-kintone-func-creater';
+import { ServiceHome } from './components/service/service-home';
 
-class App extends React.Component {
+interface AppState {
+  mode: AppMode;
+  reload: boolean;
+}
+
+export class AppMode {
+  static TEMPLATE = 'template';
+  static SERVICE = 'service';
+}
+
+class App extends React.Component<{}, AppState> {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      mode: AppMode.TEMPLATE,
+      reload: false
+    }
+    this.change = this.change.bind(this);
+  }
+
+  change(m: AppMode) {
+    this.setState({
+      mode: m
+    });
+  }
+
   render () {
     return (
       <div>
         <Header />
         <div className="container">
           <div className="sidebar-box">
-            <Sidebar />
+            <Sidebar onLinkClick={this.change}/>
           </div>
           <div className="main-box">
-            <BrowserRouter>
-              <Route exact path="/setting/" component={TemplateHome}/>
-              <Route path="/setting/template" component={TemplateHome} />
-              <Route path="/setting/service/select" component={ServiceSelect} />
-              <Route path="/setting/service/salesforce" component={ServiceSalesforce} />
-              <Route exact path="/setting/service/kintone" component={ServiceKintone} />
-              <Route path="/setting/service/kintone/func/create" component={ServiceKintoneFuncCreater} />
-            </BrowserRouter>
+            {(() => {
+              if (this.state.mode === AppMode.TEMPLATE) {
+                return <TemplateHome />
+              } else if (this.state.mode === AppMode.SERVICE) {
+                return <ServiceHome />
+              }
+            })()}
           </div>
         </div>
         <Footer />

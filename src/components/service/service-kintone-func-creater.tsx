@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { getData, postData, generateGetUrlObj } from '../../utils/fetch-utils';
-import { Template, TemplateKey, KintoneApp, KintoneProperty } from '../../mailconnect';
+import { Template, TemplateKey, KintoneApp, KintoneProperty, KintoneField } from '../../mailconnect';
 import { SelectBoxCreater } from '../../utils/html-utils';
 
 interface ServiceKintoneFuncCreaterState {
@@ -11,10 +11,13 @@ interface ServiceKintoneFuncCreaterState {
   selectedTemplateId: string | null;
   selectedApp: KintoneApp | null;
   keys: TemplateKey[] | null;
-  kintoneProperties: KintoneProperty[] | null;
+  kintoneProperties: KintoneProperty[] | null;  // Kintoneから取得した生の項目情報
+  kintoneFields: KintoneField[] | null; // 選択したkintonefieldとtemplate_keyのマッピング(DB保存形式)
 }
 
-interface ServiceKintoneFuncCreaterProps {}
+interface ServiceKintoneFuncCreaterProps {
+  createCancel: () => void;
+}
 
 interface InputEvent extends React.FormEvent<HTMLInputElement> {
   target: HTMLInputElement;
@@ -32,7 +35,8 @@ export class ServiceKintoneFuncCreater extends React.Component<ServiceKintoneFun
       selectedTemplateId: null,
       selectedApp: null,
       keys: null,
-      kintoneProperties: null
+      kintoneProperties: null,
+      kintoneFields: null
     };
     // binding
     this.onChangeTemplate = this.onChangeTemplate.bind(this);
@@ -190,6 +194,29 @@ export class ServiceKintoneFuncCreater extends React.Component<ServiceKintoneFun
   }
 
   /**
+   * Kintone項目が選択されたときのアクション
+   */
+  onKintoneFieldsSelected(template_key_id, field_code, field_label) {
+    // Kintone field作成
+    const kintoneField: KintoneField = {
+      label: field_label,
+      field_code: field_code,
+      template_key_id: template_key_id
+    };
+    // stateにセット
+    let tmpFields;
+    if (this.state.kintoneFields) {
+      tmpFields = Object.create(this.state.kintoneFields);
+    } else {
+      tmpFields = [];
+    }
+    tmpFields.push(kintoneField);
+    this.setState({
+      kintoneFields: tmpFields
+    });
+  }
+
+  /**
    * 選択テンプレートのキーリストを作成
    */
   keysListCreater() {
@@ -203,9 +230,21 @@ export class ServiceKintoneFuncCreater extends React.Component<ServiceKintoneFun
               <label>{e.key}</label>
             </td>
             <td>
+              {/* CREATE KINTONE FIELD SELECT BOX */}
               {(() => {
                 if (this.state.kintoneProperties) {
-                  return <SelectBoxCreater trg={this.state.kintoneProperties} onSelectChange={() => {}} />;
+                  const properties = this.state.kintoneProperties;
+                  const options = properties.map((pro) => {
+                    if (e) {
+                      return (<option id={pro.label} key={pro.label} value={pro.code}>{pro.name}</option>);
+                    }
+                  });
+                  options.unshift(<option key="-" value="-">-</option>);
+                  return (
+                    <div className="cp_ipselect cp_sl01">
+                      <select defaultValue="-" onChange={(event) => this.onKintoneFieldsSelected(e.id, event.target.value, event.target.id)}> {options} </select>
+                    </div>
+                  );
                 }
               })()}
             </td>
@@ -224,9 +263,11 @@ export class ServiceKintoneFuncCreater extends React.Component<ServiceKintoneFun
   submit() {
     const url = '/api/v1/kintone-function/create';
     const params = {
+      name: this.state.functionName,
       selectedTemplateId: this.state.selectedTemplateId,
       selectedAppId: this.state.selectedApp.id,
       selectedAppSpaceId: this.state.selectedApp.spaceId,
+      kintoneFields: this.state.kintoneFields
     };
     postData(url, params)
     .then((result) => { console.log(result) })
@@ -272,6 +313,9 @@ export class ServiceKintoneFuncCreater extends React.Component<ServiceKintoneFun
                       </div>
                       <div>
                         <a className="btn-border pointer" onClick={() => this.submit()}>作成</a>
+                      </div>
+                      <div>
+                        <a className="btn-link pointer" onClick={() => this.props.createCancel()}>キャンセル</a>
                       </div>
                     </div>
                   );

@@ -62,6 +62,9 @@ export class TemplateCreate extends React.Component<TemplateCreateProps, Templat
             <div>
               <a className="btn-border pointer" onClick={() => this.submit()}>作成</a>
             </div>
+            <div>
+              <a className="btn-link pointer" onClick={() => this.props.backList()}>キャンセル</a>
+            </div>
           </div>
         </div>
       </div>

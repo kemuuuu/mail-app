@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true
     },
     kintone_function_id: DataTypes.INTEGER,
+    template_key_id: DataTypes.INTEGER,
     label: DataTypes.STRING,
     field_code: DataTypes.STRING
   }, {});
@@ -15,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'kintone_function_id',
       targetKey: 'id'
     });
-    kintone_field.belongsToMany(models.template_key, { through: models.kintone_mapping });
+    kintone_field.belongsTo(models.template_key, {
+      foreignKey: 'template_key_id',
+      targetKey: 'id'
+    });
   };
   return kintone_field;
 };

@@ -30,6 +30,17 @@ export interface AuthInfo {
 }
 
 /**
+ * Kintone field DB保存形式
+ */
+export interface KintoneField {
+  id?: string;
+  kintone_function_id?: string;
+  label: string;
+  field_code: string;
+  template_key_id: string;
+}
+
+/**
  * kintone api から取得したアプリ情報
  * id === appId
  */
