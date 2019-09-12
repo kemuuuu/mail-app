@@ -632,11 +632,12 @@ table td {
 }
 
 .template-key-row {
-  width: 65%;
+  width: 100%;
   display: flex;
   align-items: baseline;
   justify-content: space-around;
-  margin: 0 auto;
+  margin: 25px auto;
+  border-bottom: 1px solid #37c0a0;
 }
 
 .template-key-label {

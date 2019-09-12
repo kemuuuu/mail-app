@@ -69,6 +69,7 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
       const tmp: TemplateKey = {
         id: '',
         template_id: templateId,
+        name: '',
         key: '',
         sort_number: i,
         a_row_below: false
@@ -82,9 +83,20 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
    * Set the array assigned value to state
    * @param event Form input event
    */
-  onKeyChange(event: InputEvent) {
+  onKeyNameChange(event: InputEvent) {
     const val = event.target.value;
-    const tmpKeys = Object.assign({}, this.state.keys);
+    const tmpKeys = Array.from(this.state.keys);
+    tmpKeys[event.target.id].name = val;
+    this.setState({ keys: tmpKeys });
+  }
+
+  /**
+   * Set the array assigned value to state
+   * @param event Form input event
+   */
+  onKeyValueChange(event: InputEvent) {
+    const val = event.target.value;
+    const tmpKeys = Array.from(this.state.keys);
     tmpKeys[event.target.id].key = val;
     this.setState({ keys: tmpKeys });
   }
@@ -115,11 +127,19 @@ export class TemplateKeyRegister extends React.Component<TemplateKeyRegisterProp
             <input 
               id={String(i)}
               type="text" 
-              name="templateName" 
+              name="name" 
               className="input-text-key" 
               value={this.state.keys[i].key}
-              onChange={ (e: InputEvent) => {this.onKeyChange(e)} }
-              placeholder="キー名を入力"></input>
+              onChange={ (e: InputEvent) => {this.onKeyNameChange(e)} }
+              placeholder="項目名を入力"></input>
+            <input 
+              id={String(i)}
+              type="text" 
+              name="key" 
+              className="input-text-key" 
+              value={this.state.keys[i].name}
+              onChange={ (e: InputEvent) => {this.onKeyValueChange(e)} }
+              placeholder="キー例: /\d{10}/"></input>
           </div>
           <label>
             <input

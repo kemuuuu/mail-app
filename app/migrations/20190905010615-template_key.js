@@ -1,8 +1,12 @@
 'use strict';
 
 module.exports = {
+  
   up: (queryInterface, Sequelize) => {
-    // 
+    return queryInterface.addColumn('template_keys', 'name', {
+      type: Sequelize.STRING,
+      allowNull: false
+    })
   },
 
   down: (queryInterface, Sequelize) => {

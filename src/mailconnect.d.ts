@@ -13,6 +13,7 @@ export interface Template {
 export interface TemplateKey { 
   id: string;
   template_id: string;
+  name: string;
   key: string;
   sort_number: number;
   a_row_below: boolean;
